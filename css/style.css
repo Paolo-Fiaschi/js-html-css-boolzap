@@ -16,6 +16,7 @@ body{
 }
 span{
   display: inline-block;
+  cursor: pointer;
 }
 main{
   width: 80%;
@@ -46,14 +47,14 @@ main{
   align-items: center;
 }
 .utenteLogo img{
-  width: auto%;
-  height: 70px;
+  width: auto;
+  height: 60px;
   border-radius: 50%;
 }
 .utenteIcons span{
   font-size: 25px;
   color: #B1B1B1;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 /* intestazione dell'utente con logo, icone, notifiche, ricerca ------*/
@@ -110,11 +111,12 @@ main{
   border-bottom-right-radius: 5px;
   font-size: 10px;
   font-weight: lighter;
-  width: 80%;
+  width: 83%;
   padding-left: 10px;
+  margin-right: 10px;
 }
 .ricerca label{
-  width: 10%;
+  width: 15%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   text-align: center;
@@ -156,6 +158,7 @@ main{
 }
 .nomeAnteprima h3{
   font-weight:  500;
+  margin-bottom: 10px;
 }
 .nomeAnteprima h4{
   font-weight: lighter;
@@ -170,59 +173,95 @@ main{
 /* informazioni del contatto selezionato ---------------------*/
 .contattoInfo{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   background-color: #EAEAEA;
   height: 70px;
 }
+.contattoSelezionato{
+  display: flex;
+}
 .contattoSelezionatoFoto{
-  width: 13%;
+  width: 15%;
+  margin-left: 10px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .contattoSelezionatoFoto img{
-  width: 100%;
+  width: auto;
+  height: 60px;
   border-radius: 50%;
+  margin-left: 15px;
 }
+.nomeAccesso{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
+}
+.nomeAccesso h3{
+  font-weight:  500;
+  margin-bottom: 10px;
+}
+.nomeAccesso h4{
+  font-weight: lighter;
+  font-size: 14px;
+  color: #7C8386;
+}
+.contattoSelezionatoIcons span{
+  font-size: 25px;
+  color: #B1B1B1;
+  margin-right: 20px;
+}
+
 /* conversazione ------------------------------*/
 .conversazione{
   background-image: url(../img/sfondoConversazione.jpg);
   width: 100%;
   height: calc(100% - 70px);
-  overflow: auto;
-  display: flex;
-  justify-content: space-around;
-}
-.msgInviati,
-.msgRicevuti{
-  min-width: 10%;
-  max-width: 50%;
   display: flex;
   flex-direction: column;
-  padding: 30px;
-}
-.msgInviati ul,
-.msgRicevuti ul{
+  justify-content: space-around;
   overflow: auto;
+}
+
+.msgRicevuti{
+  display: flex;
+  margin-left: 40px;
 }
 .msgInviati{
   display: flex;
   justify-content: flex-end;
-  flex-direction: column;
+  margin-right: 40px;
 }
-.msgRicevuti li{
+.msgRicevutiTesto{
   background-color: white;
-  width: 100%;
+  /* width: 100%; */
   padding: 20px;
   border-radius: 10px;
   margin-top: 10px;
-
+  max-width: 90%;
+  display: flex;
 }
-.msgInviati li{
+.msgInviatiTesto{
   background-color: #D5F9BA;
-  width: 100%;
   padding: 20px;
   border-radius: 10px;
   margin-top: 10px;
+  max-width: 90%;
+  display: flex;
 }
+.opzioniMsg{
+  display: none;
+}
+.opzioniMsgActive,
+.opzioniMsgActive{
+  display: block;
+  margin-left: 5px;
 
+}
 /* mag da inviare ---------------------------------*/
 .invio{
   height: 70px;
