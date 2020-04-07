@@ -21,27 +21,36 @@ main{
   width: 80%;
   height: 94%;
   display: flex;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #B1B1B1;
 }
 /* nome dei contatti -------------------------------------------------*/
 #left{
   width: 35%;
   height: 100%;
+  border-right: 1px solid #B1B1B1;
 }
 .utenteInfo{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #EAEAEA;
   height: 70px;
   width: 100%;
+  align-items: center;
 }
 .utenteLogo{
-  width: 15%;
+  width: 13%;
+  margin-left: 10px;
 }
 .utenteLogo img{
   width: 100%;
   border-radius: 50%;
 }
+.utenteIcons span{
+  font-size: 25px;
+  color: #B1B1B1;
+  margin-right: 10px;
+}
+
 /* intestazione dell'utente con logo, icone, notifiche, ricerca ------*/
 .utente{
   width: 100%;
@@ -83,7 +92,6 @@ main{
 }
 .ricerca{
   width: 100%;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,16 +99,29 @@ main{
   background-color: #FAFAFA;
 }
 .ricerca input{
-  height: 80%;
-  border-radius: 5px;
+  height: 60%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   font-size: 10px;
   font-weight: lighter;
+  width: 80%;
+  padding-left: 10px;
+}
+.ricerca label{
+  width: 10%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  text-align: center;
+  background-color: white;
+  margin-left: 10px;
+  height: 60%;
+  display: flex;
+  align-items: center;
 }
 .fa-search{
-  position: absolute;
-  top: 15px;
-  left: 22px;
-  color: #6B7376;
+  color: #B1B1B1;
+  width: 100%;
 }
 /* informazioni dei contatti con anteprima msg ------------*/
 .contattiMsg{
@@ -109,12 +130,32 @@ main{
   overflow: auto;
   background: white;
 }
+.contattiMsg ul li{
+  display: flex;
+  border-bottom: 1px solid #FAFAFA;
+  padding: 10px;
+}
 .foto{
   width: 15%;
+  margin-left: 10px;
 }
 .foto img{
   width: 100%;
   border-radius: 50%;
+}
+.nomeAnteprima{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+.nomeAnteprima h3{
+  font-weight:  500;
+}
+.nomeAnteprima h4{
+  font-weight: lighter;
+  font-size: 14px;
+  color: #B6B9BB;
 }
 /* conversazioni --------------------------------------*/
 #right{
@@ -129,7 +170,7 @@ main{
   height: 70px;
 }
 .contattoSelezionatoFoto{
-  width: 15%;
+  width: 13%;
 }
 .contattoSelezionatoFoto img{
   width: 100%;
@@ -147,9 +188,14 @@ main{
 .msgInviati,
 .msgRicevuti{
   min-width: 10%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   padding: 30px;
+}
+.msgInviati ul,
+.msgRicevuti ul{
+  overflow: auto;
 }
 .msgInviati{
   display: flex;
@@ -184,11 +230,18 @@ main{
 .invio input{
   width: 80%;
   height: 70%;
-  border-radius: 5px;
   font-size: 13px;
   font-weight: lighter;
+  padding-left: 20px;
+  border: none;
+  border-radius: 5px;
 }
-.invio span{
+.smile,
+.microfono,
+.invioIcon{
   font-size: 25px;
   color: #6B7376;
+}
+.invioIcon{
+  display: none;
 }
