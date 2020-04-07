@@ -1,0 +1,194 @@
+/* regole generali --------------------------------------------*/
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  letter-spacing: .5px;
+}
+body{
+  background-image: linear-gradient(to bottom, #009688 0px, #009688 15vh, #dddbd1 15vh, #d2dbdc 100% );
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+span{
+  display: inline-block;
+}
+main{
+  width: 80%;
+  height: 94%;
+  display: flex;
+  border: 1px solid #EAEAEA;
+}
+/* nome dei contatti -------------------------------------------------*/
+#left{
+  width: 35%;
+  height: 100%;
+}
+.utenteInfo{
+  display: flex;
+  justify-content: space-around;
+  background-color: #EAEAEA;
+  height: 70px;
+  width: 100%;
+}
+.utenteLogo{
+  width: 15%;
+}
+.utenteLogo img{
+  width: 100%;
+  border-radius: 50%;
+}
+/* intestazione dell'utente con logo, icone, notifiche, ricerca ------*/
+.utente{
+  width: 100%;
+  height: 20%;
+}
+/* notifiche -----------------------------*/
+.notifiche{
+  display: flex;
+  width: 100%;
+  background-color: #8EDAFC;
+  height: 60%;
+  align-items: center;
+}
+.notificheIcon{
+  width: 13%;
+  margin-left: 10px;
+}
+.fa-bell-slash{
+  font-size: 25px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 20%;
+  color: #8EDAFC;
+}
+.notificheTesto{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.notificheTesto h3{
+  font-size: 16px;
+  padding-bottom: 3px;
+}
+.notificheTesto h4{
+  font-size: 14px;
+  color: #507688;
+  text-decoration: underline;
+}
+.ricerca{
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  background-color: #FAFAFA;
+}
+.ricerca input{
+  height: 80%;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: lighter;
+}
+.fa-search{
+  position: absolute;
+  top: 15px;
+  left: 22px;
+  color: #6B7376;
+}
+/* informazioni dei contatti con anteprima msg ------------*/
+.contattiMsg{
+  width: 100%;
+  height: calc(80% - 70px);
+  overflow: auto;
+  background: white;
+}
+.foto{
+  width: 15%;
+}
+.foto img{
+  width: 100%;
+  border-radius: 50%;
+}
+/* conversazioni --------------------------------------*/
+#right{
+  width: 65%;
+  height: calc(100% - 70px);
+}
+/* informazioni del contatto selezionato ---------------------*/
+.contattoInfo{
+  display: flex;
+  justify-content: space-around;
+  background-color: #EAEAEA;
+  height: 70px;
+}
+.contattoSelezionatoFoto{
+  width: 15%;
+}
+.contattoSelezionatoFoto img{
+  width: 100%;
+  border-radius: 50%;
+}
+/* conversazione ------------------------------*/
+.conversazione{
+  background-image: url(../img/sfondoConversazione.jpg);
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.msgInviati,
+.msgRicevuti{
+  min-width: 10%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+.msgInviati{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.msgRicevuti li{
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+
+}
+.msgInviati li{
+  background-color: #D5F9BA;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* mag da inviare ---------------------------------*/
+.invio{
+  height: 70px;
+  background-color: #EAEAEA;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.invio input{
+  width: 80%;
+  height: 70%;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: lighter;
+}
+.invio span{
+  font-size: 25px;
+  color: #6B7376;
+}
