@@ -38,11 +38,16 @@ main{
   align-items: center;
 }
 .utenteLogo{
-  width: 13%;
+  width: 15%;
   margin-left: 10px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .utenteLogo img{
-  width: 100%;
+  width: auto%;
+  height: 70px;
   border-radius: 50%;
 }
 .utenteIcons span{
