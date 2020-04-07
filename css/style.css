@@ -142,6 +142,13 @@ main{
   border-bottom: 1px solid #FAFAFA;
   padding: 10px;
 }
+.contattiMsg ul li:hover{
+  background-color: #F4F5F5;
+  cursor: pointer;
+}
+.contattoAnteprimaActive{
+  background-color: #E9EBEB;
+}
 .foto{
   width: 15%;
   margin-left: 10px;
