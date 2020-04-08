@@ -150,12 +150,17 @@ main{
   background-color: #E9EBEB;
 }
 .foto{
-  width: 15%;
-  margin-left: 10px;
+  display: flex;
 }
 .foto img{
-  width: 100%;
+  width: 15%;
   border-radius: 50%;
+}
+.accesso{
+  align-self: center;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #B6B9BB;
 }
 .nomeAnteprima{
   display: flex;
