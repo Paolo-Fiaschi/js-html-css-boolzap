@@ -256,7 +256,6 @@ main{
 }
 .msgRicevutiTesto{
   background-color: white;
-  /* width: 100%; */
   padding: 20px;
   border-radius: 10px;
   margin-top: 10px;
@@ -274,11 +273,13 @@ main{
 .opzioniMsg{
   display: none;
 }
-.opzioniMsgActive,
-.opzioniMsgActive{
-  display: flex;
+.msgInviatiTesto:hover .opzioniMsg,
+.msgRicevutiTesto:hover .opzioniMsg{
+  display: block;
   margin-left: 5px;
-
+  font-weight: lighter;
+  font-size: 14px;
+  color: #B6B9BB;
 }
 /* mag da inviare ---------------------------------*/
 .invio{

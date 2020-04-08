@@ -5,7 +5,8 @@ $(document).ready(function(){
   var invio = $(".fa-telegram-plane");
   var msgInviati = $(".conversazione");
   var scrivoMsg = $(".invio input");
-  var opzioniMsg = $(".msgInviati");
+  var infoMsgInviati = $(".msgInviatiTesto");
+  var infoMsgRicevuti = $(".msgRicevutiTesto");
   var msgRicevuti = $(".conversazione");
   var contattoAnteprima = $(".contattoAnteprima");
 
@@ -19,7 +20,7 @@ $(document).ready(function(){
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
     var contenutoMsg = $(".invio input").val();
-    msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'<i class='fas fa-chevron-down'></i></span></p></div>");
+    msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
     // cambio lo stato dell'utente mentre risponde (sta scrivendo)
     $(".nomeAccesso h4").hide();
     $(".nomeAccesso span").show();
@@ -28,7 +29,7 @@ $(document).ready(function(){
     setTimeout(inviaMsg, 1000);
     function inviaMsg(){
       console.log("ok");
-      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'>" + "ok" + "</p></div>");
+      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
       // lo stato dell'utente torna di default (ultimo accesso)
       $(".nomeAccesso h4").show();
       $(".nomeAccesso span").hide();
@@ -40,10 +41,15 @@ $(document).ready(function(){
     $(".invioIcon").css('display', 'none');
 
   }
-  //aggiungere la freccia in basso per il menu a tendina
 
-  // opzioniMsg.mouseover(function(){
-  //   $(this).addClass('opzioniMsgActive');
+  //aggiungere la freccia in basso per il menu a tendina
+  // infoMsgInviati.mouseover(function() {
+  //   $(this).removeClass('opzioniMsg');
+  //   $(".msgInviatiTesto span:last-child").toggleClass('opzioniMsgActive');
+  // });
+  //
+  // infoMsgRicevuti.mouseover(function() {
+  //   $(".msgRicevutiTesto span:last-child").toggleClass('opzioniMsgActive');
   // });
 
 
@@ -54,7 +60,7 @@ $(document).ready(function(){
     if (event.which == 13) {
       console.log("invio");
       var contenutoMsg = $(".invio input").val();
-      msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'<i class='fas fa-chevron-down'></i></span></p></div>");
+      msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
       // cambio lo stato dell'utente mentre risponde (sta scrivendo)
       $(".nomeAccesso h4").hide();
       $(".nomeAccesso span").show();
@@ -64,7 +70,7 @@ $(document).ready(function(){
       setTimeout(inviaMsg, 1000);
       function inviaMsg(){
         console.log("ok");
-        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'>" + "ok" + "</p></div>");
+        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
         // lo stato dell'utente torna di default (ultimo accesso)
         $(".nomeAccesso h4").show();
         $(".nomeAccesso span").hide();
