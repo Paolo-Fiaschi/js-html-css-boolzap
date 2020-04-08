@@ -261,6 +261,7 @@ main{
   margin-top: 10px;
   max-width: 90%;
   display: flex;
+  position: relative;
 }
 .msgInviatiTesto{
   background-color: #D5F9BA;
@@ -269,6 +270,7 @@ main{
   margin-top: 10px;
   max-width: 90%;
   display: flex;
+  position: relative;
 }
 .opzioniMsg{
   display: none;
@@ -281,7 +283,16 @@ main{
   font-size: 14px;
   color: #B6B9BB;
 }
-/* mag da inviare ---------------------------------*/
+.msgInviatiTesto .ora,
+.msgRicevutiTesto .ora{
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
+  font-weight: lighter;
+  font-size: 12px;
+  color: #7C8386;
+}
+/* msg da inviare ---------------------------------*/
 .invio{
   height: 70px;
   background-color: #EAEAEA;

@@ -9,18 +9,35 @@ $(document).ready(function(){
   var infoMsgRicevuti = $(".msgRicevutiTesto");
   var msgRicevuti = $(".conversazione");
   var contattoAnteprima = $(".contattoAnteprima");
+  var d = new Date();
+  var ora = d.getHours();
+  // var minuti = d.getMinutes();
+  var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti
 
   //visualizzo solo il microfono e non il pulsante invio
-  scrivoMsg.click(function(){
-    $(".microfono").css('display', 'none');
-    $(".invioIcon").css('display', 'block');
-
+  scrivoMsg.keydown(function() {
+    var contenutoMsg = $(".invio input").val();
+    // il tasto invio compare solo se è presente il msg
+    if (contenutoMsg.length == 0) {
+      $(".microfono").css('display', 'block');
+      $(".invioIcon").css('display', 'none');
+      console.log(contenutoMsg);
+      // il tasto invio non compare se non cè il msg
+    }else{
+      $(".microfono").css('display', 'none');
+      $(".invioIcon").css('display', 'block');
+      console.log(contenutoMsg);
+    }
   });
-
+  // imposto la data corrente
+  $(".ora").html(ora + ":" + minuti);
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
     var contenutoMsg = $(".invio input").val();
-    msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
+    msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+    // aggiungo la data ai messaggi inviati
+    $(".ora").html(ora + ":" + minuti);
+
     // cambio lo stato dell'utente mentre risponde (sta scrivendo)
     $(".nomeAccesso h4").hide();
     $(".nomeAccesso span").show();
@@ -29,10 +46,13 @@ $(document).ready(function(){
     setTimeout(inviaMsg, 1000);
     function inviaMsg(){
       console.log("ok");
-      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
+      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      // aggiungo la data ai messaggi inviati
+      $(".ora").html(ora + ":" + minuti);
+
       // lo stato dell'utente torna di default (ultimo accesso)
       $(".nomeAccesso h4").show();
-      $(".nomeAccesso span").hide();
+      $(".nomeAccesso .hide").hide();
 
     }
     console.log($(this));
@@ -42,25 +62,18 @@ $(document).ready(function(){
 
   }
 
-  //aggiungere la freccia in basso per il menu a tendina
-  // infoMsgInviati.mouseover(function() {
-  //   $(this).removeClass('opzioniMsg');
-  //   $(".msgInviatiTesto span:last-child").toggleClass('opzioniMsgActive');
-  // });
-  //
-  // infoMsgRicevuti.mouseover(function() {
-  //   $(".msgRicevutiTesto span:last-child").toggleClass('opzioniMsgActive');
-  // });
-
-
   // invia il msg con tasto invio (tasto 13)
   $(".invio input").keydown(function(event) {
-
+    var contenutoMsg = $(".invio input").val();
     console.log(event);
-    if (event.which == 13) {
+    // si può inivare il msg solo se premendo invio e se il msg c'è
+    if ((event.which == 13)&&(contenutoMsg.length != 0)) {
       console.log("invio");
       var contenutoMsg = $(".invio input").val();
-      msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
+      msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      // aggiungo la data ai messaggi inviati
+      $(".ora").html(ora + ":" + minuti);
+
       // cambio lo stato dell'utente mentre risponde (sta scrivendo)
       $(".nomeAccesso h4").hide();
       $(".nomeAccesso span").show();
@@ -70,10 +83,15 @@ $(document).ready(function(){
       setTimeout(inviaMsg, 1000);
       function inviaMsg(){
         console.log("ok");
-        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span></p></div>");
+        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+        // aggiungo la data ai messaggi inviati
+        $(".ora").html(ora + ":" + minuti);
+
         // lo stato dell'utente torna di default (ultimo accesso)
         $(".nomeAccesso h4").show();
-        $(".nomeAccesso span").hide();
+        $(".nomeAccesso .hide").hide();
+        // aggiungo la data ai messaggi inviati
+        $(".ora").html(ora + ":" + minuti);
 
       }
       $(".invio input").val("");
