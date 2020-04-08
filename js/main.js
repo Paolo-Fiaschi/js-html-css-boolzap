@@ -20,16 +20,20 @@ $(document).ready(function(){
   function inviaMsg(){
     var contenutoMsg = $(".invio input").val();
     msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'<i class='fas fa-chevron-down'></i></span></p></div>");
+    // cambio lo stato dell'utente mentre risponde (sta scrivendo)
+    $(".nomeAccesso h4").hide();
+    $(".nomeAccesso span").show();
 
-    // msgInviati.append("<div class='msgInviati'>" + '<p class="msgInviatiTesto">' + contenutoMsg + '</p>' + "</div>");
     //risposta automatica del pc
     setTimeout(inviaMsg, 1000);
     function inviaMsg(){
       console.log("ok");
-      msgRicevuti.append("<div class='msgRicevuti'>" + '<p class="msgRicevutiTesto">' + "ok" + '</p>' + "</div>");
+      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'>" + "ok" + "</p></div>");
+      // lo stato dell'utente torna di default (ultimo accesso)
+      $(".nomeAccesso h4").show();
+      $(".nomeAccesso span").hide();
+
     }
-
-
     console.log($(this));
     $(".invio input").val("");
     $(".microfono").css('display', 'block');
@@ -51,12 +55,20 @@ $(document).ready(function(){
       console.log("invio");
       var contenutoMsg = $(".invio input").val();
       msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'<i class='fas fa-chevron-down'></i></span></p></div>");
+      // cambio lo stato dell'utente mentre risponde (sta scrivendo)
+      $(".nomeAccesso h4").hide();
+      $(".nomeAccesso span").show();
+
       //risposta automatica del pc
 
       setTimeout(inviaMsg, 1000);
       function inviaMsg(){
         console.log("ok");
-        msgRicevuti.append("<div class='msgRicevuti'>" + '<p class="msgRicevutiTesto">' + "ok" + '</p>' + "</div>");
+        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'>" + "ok" + "</p></div>");
+        // lo stato dell'utente torna di default (ultimo accesso)
+        $(".nomeAccesso h4").show();
+        $(".nomeAccesso span").hide();
+
       }
       $(".invio input").val("");
       $(".microfono").css('display', 'block');
@@ -73,15 +85,14 @@ $(document).ready(function(){
   });
   // filtro contatti
   //gestirte evento su tastiera (oppure su click di bottone di input ricerca)
-  $(".ricercaContatto").keypress(function(e) {
+  $(".ricercaContatto").keyup(function(e) {
     var c = String.fromCharCode(e.which);
     console.log(c);
     // salvarmi input utente in campo del filtro (stringa1)
-    var contenutoRicercaContatto = $(".ricercaContatto").val();
+    var contenutoRicercaContatto = $(".ricercaContatto").val().toLowerCase();
     // selezionare tutti i blocchi di contatto e ciclare tra di essi (each())
     //salvo in una var il valore del testo del nome nel contatto (stringa2)
     $(".contattoAnteprima").each(function(index) {
-      // console.log(index + ":" + $( this ).text());
       var nomeContatto = $(".nomeAnteprima h3");
       console.log($(this).find(nomeContatto).text().toLowerCase());
       $(this).find(nomeContatto).text().toLowerCase().includes(contenutoRicercaContatto);
@@ -119,11 +130,6 @@ $(document).ready(function(){
   //     });
   //   }
   // );
-    // confronto per vedere se la stringa inserita nell'input è inclusa nel nome del contatto
-      //stringa2.includes(stringa1)
-
-      //se l'occorenza è stata trovata lascio il blocco di contatto visibile
-      // altrimenti lo rendo non visibile (this)
 
 
 

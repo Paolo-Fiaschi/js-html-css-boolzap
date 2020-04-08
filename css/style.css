@@ -39,7 +39,7 @@ main{
   align-items: center;
 }
 .utenteLogo{
-  width: 15%;
+  width: auto;
   margin-left: 10px;
   height: 70px;
   display: flex;
@@ -187,6 +187,7 @@ main{
 }
 .contattoSelezionato{
   display: flex;
+  justify-content: space-around;
 }
 .contattoSelezionatoFoto{
   width: 15%;
@@ -212,10 +213,15 @@ main{
   font-weight:  500;
   margin-bottom: 10px;
 }
-.nomeAccesso h4{
+.default{
   font-weight: lighter;
   font-size: 14px;
   color: #7C8386;
+  display: none;
+  width: 100%;
+}
+.show{
+  display: block;
 }
 .contattoSelezionatoIcons span{
   font-size: 25px;
