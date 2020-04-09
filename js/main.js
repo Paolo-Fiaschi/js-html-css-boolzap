@@ -3,11 +3,11 @@ $(document).ready(function(){
 
   // dichiarazione variabili
   var invio = $(".fa-telegram-plane");
-  var msgInviati = $(".rightActive .conversazione");
+
   var scrivoMsg = $(".invio input");
   var infoMsgInviati = $(".msgInviatiTesto");
   var infoMsgRicevuti = $(".msgRicevutiTesto");
-  var msgRicevuti = $(".rightActive .conversazione");
+  var conversazioneAttuale = $(".rightActive .conversazione");
   var contattoAnteprima = $(".contattoAnteprima");
   var d = new Date();
   var ora = d.getHours();
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
   //visualizzo solo il microfono e non il pulsante invio
   scrivoMsg.keydown(function() {
-    var contenutoMsg = $(".invio input").val();
+    var contenutoMsg = $(".invioShow input").val();
     // il tasto invio compare solo se è presente il msg
     if (contenutoMsg.length == 0) {
       $(".microfono").css('display', 'block');
@@ -33,9 +33,9 @@ $(document).ready(function(){
   $(".ora").html(ora + ":" + minuti);
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
-    var contenutoMsg = $(".invio input").val();
+    var contenutoMsg = $(".invioShow input").val();
     console.log(contenutoMsg);
-    msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+    conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
     // aggiungo la data ai messaggi inviati
     $(".ora").html(ora + ":" + minuti);
 
@@ -44,10 +44,9 @@ $(document).ready(function(){
     $(".nomeAccesso span").show();
 
     //risposta automatica del pc
-    setTimeout(inviaMsg, 1000);
-    function inviaMsg(){
+    setTimeout(function(){
       console.log("ok");
-      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
 
@@ -55,7 +54,9 @@ $(document).ready(function(){
       $(".nomeAccesso h4").show();
       $(".nomeAccesso .hide").hide();
 
-    }
+    }, 1000);
+
+
     console.log($(this));
     $(".invio input").val("");
     $(".microfono").css('display', 'block');
@@ -71,7 +72,7 @@ $(document).ready(function(){
     if ((event.which == 13)&&(contenutoMsg.length != 0)) {
       console.log("invio");
       var contenutoMsg = $(this).val();
-      msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
 
@@ -81,10 +82,9 @@ $(document).ready(function(){
 
       //risposta automatica del pc
 
-      setTimeout(inviaMsg, 1000);
-      function inviaMsg(){
+      setTimeout(function(){
         console.log("ok");
-        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+        conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
         // aggiungo la data ai messaggi inviati
         $(".ora").html(ora + ":" + minuti);
 
@@ -94,7 +94,7 @@ $(document).ready(function(){
         // aggiungo la data ai messaggi inviati
         $(".ora").html(ora + ":" + minuti);
 
-      }
+      }, 1000);
       $(this).val("");
       $(".microfono").css('display', 'block');
       $(".invioIcon").css('display', 'none');
@@ -104,10 +104,17 @@ $(document).ready(function(){
   invio.click(inviaMsg);
 
   // RICONTROLLARE
-  informazioni msg
-  $("main").on("click","opzioniMsg"
+  // informazioni msg
+  $("main").on("click",".opzioniMsg",
     function(){
-      $(this).css('color', 'red');
+      var infoMsg = $(".infoMsg");
+      // $(".infoMsgInviati").removeClass('infoMsgHide');
+      infoMsg.each(function() {
+        console.log(infoMsg);
+        if ($(this).hasClass('infoMsgInviati')) {
+          $(this).removeClass('infoMsgHide');
+        }
+      });
     }
 
   );
@@ -115,6 +122,7 @@ $(document).ready(function(){
   //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
   contattoAnteprima.click(function(){
     $(".right").removeClass('rightActive');
+    $(".invio").removeClass('invioShow');
     contattoAnteprima.removeClass('contattoAnteprimaActive');
     $(this).addClass('contattoAnteprimaActive');
     var contattoSelezionato = $(this).data("chat");
@@ -126,6 +134,16 @@ $(document).ready(function(){
         $(this).addClass('rightActive');
       }
     });
+    $(".invio").each(function() {
+      var invioShow = $(this).data("chat");
+      console.log($(this).data("chat"));
+      if (invioShow == contattoSelezionato) {
+        $(this).addClass('invioShow');
+      }
+    });
+
+    conversazioneAttuale = $(".rightActive .conversazione");
+
   });
   // filtro contatti
   //gestirte evento su tastiera (oppure su click di bottone di input ricerca)
