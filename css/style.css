@@ -178,9 +178,13 @@ main{
   color: #B6B9BB;
 }
 /* conversazioni --------------------------------------*/
-#right{
+.right{
   width: 65%;
   height: calc(100% - 70px);
+  display: none;
+}
+.rightActive{
+  display: block;
 }
 /* informazioni del contatto selezionato ---------------------*/
 .contattoInfo{
@@ -239,20 +243,44 @@ main{
   background-image: url(../img/sfondoConversazione.jpg);
   width: 100%;
   height: calc(100% - 70px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   overflow: auto;
 }
 
 .msgRicevuti{
   display: flex;
   margin-left: 40px;
+  position: relative;
 }
 .msgInviati{
   display: flex;
   justify-content: flex-end;
   margin-right: 40px;
+  position: relative;
+}
+.infoMsgInviati{
+  position: absolute;
+  bottom: -100px;
+  right: 0;
+}
+.infoMsgRicevuti{
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+}
+
+.infoMsg{
+  display: flex;
+  flex-direction: column;
+  background: white;
+  width: 150px;
+  height: 100px;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
+  border-radius: 2px;
+}
+.infoMsgHide{
+  display: none;
 }
 .msgRicevutiTesto{
   background-color: white;

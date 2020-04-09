@@ -43,7 +43,7 @@
         <!-- informazioni dei contatti con anteprima msg ----->
         <div class="contattiMsg">
           <ul>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="1">
               <div class="foto">
                 <img src="img/avatar1.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -53,7 +53,7 @@
               </div>
               <span class="accesso">17.45</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="2">
               <div class="foto">
                 <img src="img/avatar2.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -63,7 +63,7 @@
               </div>
               <span class="accesso">12.20</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="3">
               <div class="foto">
                 <img src="img/avatar3.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -73,7 +73,7 @@
               </div>
               <span class="accesso">20.25</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="4">
               <div class="foto">
                 <img src="img/avatar4.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -83,7 +83,7 @@
               </div>
               <span class="accesso">09.45</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="5">
               <div class="foto">
                 <img src="img/avatar5.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -93,7 +93,7 @@
               </div>
               <span class="accesso">12.30</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="6">
               <div class="foto">
                 <img src="img/avatar6.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -103,7 +103,7 @@
               </div>
               <span class="accesso">23.56</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="7">
               <div class="foto">
                 <img src="img/avatar7.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -113,7 +113,7 @@
               </div>
               <span class="accesso">16.13</span>
             </li>
-            <li class="contattoAnteprima">
+            <li class="contattoAnteprima" data-chat="8">
               <div class="foto">
                 <img src="img/avatar8.jpg" alt="">
                 <div class="nomeAnteprima">
@@ -127,7 +127,7 @@
         </div>
       </section>
       <!-- conversazioni --------------------------------->
-      <section id="right">
+      <section class="right rightActive" data-chat="1">
         <!-- informazioni del contatto selezionato -------->
         <div class="contattoInfo">
           <div class="contattoSelezionato">
@@ -155,6 +155,10 @@
               <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
               <span class="ora"></span>
             </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
           </div>
           <div class="msgRicevuti">
             <p class="msgRicevutiTesto">
@@ -162,6 +166,10 @@
               <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
               <span class="ora"></span>
             </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
           </div>
           <!-- messaggi inviati ---------------->
           <div class="msgInviati">
@@ -171,6 +179,486 @@
               </span>
               <span class="ora"></span>
             </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="2">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar2.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Fabio</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>ciao come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Tutto bene, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="3">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar3.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Samuele</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>ciao come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Tutto bene</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Te tutto bene?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="4">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar4.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Alessandro B.</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>ciao come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Tutto bene, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Bene bene</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="5">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar5.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Alessandro L.</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Ciao</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Tutto bene, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Stasera?pazza gioia?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="6">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar6.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Claudia</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Come va?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Novità?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Bah insomma</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Sempre le solite cose, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="7">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar7.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Davide</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>ciao come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Che fai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>Ieri?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Tutto bene, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+        </div>
+        <!-- msg da inviare ------------------------->
+        <div class="invio">
+          <span class="smile"><i class="far fa-smile"></i></span>
+          <input type="text" name="msg" value="" placeholder="Scrivi un messaggio">
+          <span class="microfono"><i class="fas fa-microphone"></i></span>
+          <span class="invioIcon"><i class="fab fa-telegram-plane"></i></span>
+        </div>
+      </section>
+      <section class="right" data-chat="8">
+        <!-- informazioni del contatto selezionato -------->
+        <div class="contattoInfo">
+          <div class="contattoSelezionato">
+            <div class="contattoSelezionatoFoto">
+              <img src="img/avatar8.jpg" alt="">
+            </div>
+            <div class="nomeAccesso">
+              <h3>Federico</h3>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora"></span></h4>
+              <span class="default hide"> Sta scrivendo...</span>
+            </div>
+          </div>
+          <div class="contattoSelezionatoIcons">
+            <span><i class="fas fa-search"></i></span>
+            <span><i class="fas fa-paperclip"></i></span>
+            <span><i class="fas fa-ellipsis-v"></i></span>
+          </div>
+        </div>
+        <!-- conversazione con il contatto selezionato ------->
+        <div class="conversazione">
+          <!-- messaggi ricevuti ---------------->
+          <div class="msgRicevuti">
+            <p class="msgRicevutiTesto">
+              <span>ciao come stai?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i></span>
+              <span class="ora"></span>
+            </p>
+            <div class=" infoMsg infoMsgRicevuti infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
+          </div>
+          <!-- messaggi inviati ---------------->
+          <div class="msgInviati">
+            <p class="msgInviatiTesto">
+              <span>Tutto bene, te?</span>
+              <span class="opzioniMsg"><i class="fas fa-chevron-down"></i>
+              </span>
+              <span class="ora"></span>
+            </p>
+            <div class="infoMsg infoMsgInviati infoMsgHide">
+              <div>Info messaggio</div>
+              <div>Cancella messaggio</div>
+            </div>
           </div>
         </div>
         <!-- msg da inviare ------------------------->
@@ -182,7 +670,12 @@
         </div>
       </section>
     </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			  crossorigin="anonymous"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

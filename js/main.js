@@ -3,11 +3,11 @@ $(document).ready(function(){
 
   // dichiarazione variabili
   var invio = $(".fa-telegram-plane");
-  var msgInviati = $(".conversazione");
+  var msgInviati = $(".rightActive .conversazione");
   var scrivoMsg = $(".invio input");
   var infoMsgInviati = $(".msgInviatiTesto");
   var infoMsgRicevuti = $(".msgRicevutiTesto");
-  var msgRicevuti = $(".conversazione");
+  var msgRicevuti = $(".rightActive .conversazione");
   var contattoAnteprima = $(".contattoAnteprima");
   var d = new Date();
   var ora = d.getHours();
@@ -34,6 +34,7 @@ $(document).ready(function(){
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
     var contenutoMsg = $(".invio input").val();
+    console.log(contenutoMsg);
     msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
     // aggiungo la data ai messaggi inviati
     $(".ora").html(ora + ":" + minuti);
@@ -46,7 +47,7 @@ $(document).ready(function(){
     setTimeout(inviaMsg, 1000);
     function inviaMsg(){
       console.log("ok");
-      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
 
@@ -64,12 +65,12 @@ $(document).ready(function(){
 
   // invia il msg con tasto invio (tasto 13)
   $(".invio input").keydown(function(event) {
-    var contenutoMsg = $(".invio input").val();
+    var contenutoMsg = $(this).val();
     console.log(event);
     // si può inivare il msg solo se premendo invio e se il msg c'è
     if ((event.which == 13)&&(contenutoMsg.length != 0)) {
       console.log("invio");
-      var contenutoMsg = $(".invio input").val();
+      var contenutoMsg = $(this).val();
       msgInviati.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
@@ -83,7 +84,7 @@ $(document).ready(function(){
       setTimeout(inviaMsg, 1000);
       function inviaMsg(){
         console.log("ok");
-        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>" + "ok" + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+        msgRicevuti.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
         // aggiungo la data ai messaggi inviati
         $(".ora").html(ora + ":" + minuti);
 
@@ -94,7 +95,7 @@ $(document).ready(function(){
         $(".ora").html(ora + ":" + minuti);
 
       }
-      $(".invio input").val("");
+      $(this).val("");
       $(".microfono").css('display', 'block');
       $(".invioIcon").css('display', 'none');
     }
@@ -102,21 +103,35 @@ $(document).ready(function(){
   // invia il msg al click
   invio.click(inviaMsg);
 
-  //Al click cambia colore il contatto selezionato
+  // RICONTROLLARE
+  informazioni msg
+  $("main").on("click","opzioniMsg"
+    function(){
+      $(this).css('color', 'red');
+    }
+
+  );
+
+  //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
   contattoAnteprima.click(function(){
+    $(".right").removeClass('rightActive');
     contattoAnteprima.removeClass('contattoAnteprimaActive');
     $(this).addClass('contattoAnteprimaActive');
+    var contattoSelezionato = $(this).data("chat");
+    // console.log(contattoSelezionato);
+    $(".right").each(function() {
+      var chatSelezionata = $(this).data("chat");
+      // console.log($(this).data("chat"));
+      if (chatSelezionata == contattoSelezionato) {
+        $(this).addClass('rightActive');
+      }
+    });
   });
   // filtro contatti
   //gestirte evento su tastiera (oppure su click di bottone di input ricerca)
-  $(".ricercaContatto").keyup(function(e) {
-    var c = String.fromCharCode(e.which);
-    console.log(c);
-    // salvarmi input utente in campo del filtro (stringa1)
+  $(".ricercaContatto").keyup(function() {
     var contenutoRicercaContatto = $(".ricercaContatto").val().toLowerCase();
-    // selezionare tutti i blocchi di contatto e ciclare tra di essi (each())
-    //salvo in una var il valore del testo del nome nel contatto (stringa2)
-    $(".contattoAnteprima").each(function(index) {
+    $(".contattoAnteprima").each(function() {
       var nomeContatto = $(".nomeAnteprima h3");
       console.log($(this).find(nomeContatto).text().toLowerCase());
       $(this).find(nomeContatto).text().toLowerCase().includes(contenutoRicercaContatto);
@@ -129,33 +144,6 @@ $(document).ready(function(){
     });
 
   });
-
-
-// RICERCA AL CLICK FUNZIONANTE
-
-  // $(".fa-search").click(
-  //   function(){
-  //
-  //     // salvarmi input utente in campo del filtro (stringa1)
-  //     var contenutoRicercaContatto = $(".ricercaContatto").val();
-  //     // selezionare tutti i blocchi di contatto e ciclare tra di essi (each())
-  //     //salvo in una var il valore del testo del nome nel contatto (stringa2)
-  //     $(".contattoAnteprima").each(function(index) {
-  //       // console.log(index + ":" + $( this ).text());
-  //       var nomeContatto = $(".nomeAnteprima h3");
-  //       console.log($(this).find(nomeContatto).text().toLowerCase());
-  //       $(this).find(nomeContatto).text().toLowerCase().includes(contenutoRicercaContatto);
-  //       console.log($(this).find(nomeContatto).text().includes(contenutoRicercaContatto));
-  //       if ($(this).find(nomeContatto).text().toLowerCase().includes(contenutoRicercaContatto)) {
-  //         $(this).show();
-  //       }else {
-  //         $(this).hide();
-  //       }
-  //     });
-  //   }
-  // );
-
-
 
 
 
