@@ -35,7 +35,7 @@ $(document).ready(function(){
   function inviaMsg(){
     var contenutoMsg = $(".invioShow input").val();
     console.log(contenutoMsg);
-    conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+    conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
     // aggiungo la data ai messaggi inviati
     $(".ora").html(ora + ":" + minuti);
 
@@ -46,14 +46,13 @@ $(document).ready(function(){
     //risposta automatica del pc
     setTimeout(function(){
       console.log("ok");
-      conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
 
       // lo stato dell'utente torna di default (ultimo accesso)
       $(".nomeAccesso h4").show();
       $(".nomeAccesso .hide").hide();
-
     }, 1000);
 
 
@@ -72,7 +71,7 @@ $(document).ready(function(){
     if ((event.which == 13)&&(contenutoMsg.length != 0)) {
       console.log("invio");
       var contenutoMsg = $(this).val();
-      conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+      conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
       // aggiungo la data ai messaggi inviati
       $(".ora").html(ora + ":" + minuti);
 
@@ -84,7 +83,7 @@ $(document).ready(function(){
 
       setTimeout(function(){
         console.log("ok");
-        conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p></div>");
+        conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
         // aggiungo la data ai messaggi inviati
         $(".ora").html(ora + ":" + minuti);
 
@@ -103,22 +102,31 @@ $(document).ready(function(){
   // invia il msg al click
   invio.click(inviaMsg);
 
-  // RICONTROLLARE
   // informazioni msg
+  // rendo visibile il div info al click dell'icona
   $("main").on("click",".opzioniMsg",
     function(){
-      var infoMsg = $(".infoMsg");
-      // $(".infoMsgInviati").removeClass('infoMsgHide');
-      infoMsg.each(function() {
-        console.log(infoMsg);
-        if ($(this).hasClass('infoMsgInviati')) {
-          $(this).removeClass('infoMsgHide');
-        }
-      });
+      $(this).parent().parent().parent().find(".infoMsg").removeClass('infoMsgShow');
+      if (!$(this).parent().siblings('.infoMsg').hasClass('infoMsgShow')) {
+        $(this).parent().siblings('.infoMsg').addClass('infoMsgShow');
+      }else {
+        $(this).parent().siblings('.infoMsg').removeClass('infoMsgShow');
+      }
     }
-
   );
-
+  // rendo invisibile il div info quando esco con il mouse
+  $("main").on("mouseleave",".infoMsg",
+    function(){
+      $(".opzioniMsg").removeClass('infoMsgShow');
+      $(this).removeClass('infoMsgShow');
+    }
+  );
+  // cancella il msg quando premo Cancella
+  $("main").on("click",".infoMsg div:last-child",
+    function(){
+      $(this).parent().parent().hide();
+    }
+  );
   //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
   contattoAnteprima.click(function(){
     $(".right").removeClass('rightActive');
