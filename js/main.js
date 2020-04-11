@@ -167,7 +167,7 @@ $(document).ready(function(){
       }
     });
     // se non viene trovato nessuno contatto
-    if (!$(".nomeAnteprima h3").text().includes(contenutoRicercaContatto)) {
+    if (!$(".nomeAnteprima h3").text().toLowerCase().includes(contenutoRicercaContatto)) {
       $(".nonTrovatoHide").css('display', 'flex');
     }else {
       $(".nonTrovatoHide").hide();
