@@ -148,6 +148,7 @@ $(document).ready(function(){
     conversazioneAttuale = $(".rightActive .conversazione");
 
   });
+
   // filtro contatti
   //gestirte evento su tastiera (oppure su click di bottone di input ricerca)
   $(".ricercaContatto").keyup(function() {
@@ -163,7 +164,12 @@ $(document).ready(function(){
         $(this).hide();
       }
     });
-
+    // se non viene trovato nessuno contatto
+    if (!$(".nomeAnteprima h3").text().includes(contenutoRicercaContatto)) {
+      $(".nonTrovatoHide").css('display', 'flex');
+    }else {
+      $(".nonTrovatoHide").hide();
+    }
   });
 
 
