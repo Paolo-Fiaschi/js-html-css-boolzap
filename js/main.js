@@ -124,6 +124,9 @@ $(document).ready(function(){
   );
   //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
   contattoAnteprima.click(function(){
+    $("p span:first-child").removeClass('color');
+    $(".chatNontrovataHide").hide();
+    $(".ricercaParoleChat").addClass('ricercaParoleChatHide');
     $(".right").removeClass('rightActive');
     $(".invio").removeClass('invioShow');
     contattoAnteprima.removeClass('contattoAnteprimaActive');
@@ -139,7 +142,6 @@ $(document).ready(function(){
     });
     $(".invio").each(function() {
       var invioShow = $(this).data("chat");
-      // console.log($(this).data("chat"));
       if (invioShow == contattoSelezionato) {
         $(this).addClass('invioShow');
       }
@@ -150,7 +152,7 @@ $(document).ready(function(){
   });
 
   // filtro contatti
-  //gestirte evento su tastiera (oppure su click di bottone di input ricerca)
+  //gestirte evento su tastiera
   $(".ricercaContatto").keyup(function() {
     var contenutoRicercaContatto = $(".ricercaContatto").val().toLowerCase();
     $(".contattoAnteprima").each(function() {
@@ -169,6 +171,48 @@ $(document).ready(function(){
       $(".nonTrovatoHide").css('display', 'flex');
     }else {
       $(".nonTrovatoHide").hide();
+    }
+  });
+  // rendo visibile la ricerca della chat nei messaggi
+  $("main").on("click",".rightActive .cercaMessaggi",
+    function(){
+      $(this).siblings("input").val("");
+
+      // se non è visibile rendila tale
+      if ($(this).siblings("input").hasClass('ricercaParoleChatHide')) {
+        $(this).siblings("input").removeClass('ricercaParoleChatHide');
+        $("p span:first-child").removeClass('color');
+      }else { //altrimenti nascondila
+        $(this).siblings("input").addClass('ricercaParoleChatHide');
+        $("p span:first-child").removeClass('color');
+      }
+    }
+  );
+  // filtro chat
+  //gestirte evento su tastiera
+  $(".ricercaParoleChat").keyup(function() {
+    var contenutoRicercaParoleChat = $(".ricercaParoleChat").val().toLowerCase();
+    // faccio un ciclo dei messaggi all'interno della chat
+    $(".conversazione div").each(function() {
+      var chatMsg = $("p span:first-child");
+      // console.log($(this).find(chatMsg).text().toLowerCase());
+      $(this).find(chatMsg).text().toLowerCase().includes(contenutoRicercaParoleChat);
+      console.log($(this).find(chatMsg).text().toLowerCase().includes(contenutoRicercaParoleChat));
+      // se il valore immesso matcha con il messaggio della chat lo evidenzio
+      if ($(this).find(chatMsg).text().toLowerCase().includes(contenutoRicercaParoleChat)) {
+        $(this).find($(chatMsg)).addClass('color');
+      }else{ //altrimenti lo lascio del colore di default
+        $(this).find($(chatMsg)).removeClass('color');
+      }
+    });
+    if (contenutoRicercaParoleChat.length == 0) {
+      $("p span:first-child").removeClass('color');
+    }
+    // se non viene trovato nessuno messaggio
+    if (!$("p span:first-child").text().includes(contenutoRicercaParoleChat)) {
+      $(".chatNontrovataHide").css('display', 'block');
+    }else {
+      $(".chatNontrovataHide").hide();
     }
   });
 
