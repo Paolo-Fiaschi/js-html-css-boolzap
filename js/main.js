@@ -15,7 +15,42 @@ $(document).ready(function(){
   var contenutoMsg = $(".invioShow input").val("");
 
   //visualizzo solo il microfono e non il pulsante invio
-  scrivoMsg.keydown(function() {
+  scrivoMsg.keydown(invioMsgShow);
+
+  // invia il msg al click
+  invio.click(inviaMsg);
+
+  // invia il msg con tasto invio (tasto 13)
+  scrivoMsg.keydown(inviaMsgTastiera);
+
+  // informazioni msg
+  // rendo visibile il div info al click dell'icona
+  $("main").on("click",".opzioniMsg",infoMsgShow);
+
+  // rendo invisibile il div info quando esco con il mouse
+  $("main").on("mouseleave",".infoMsg",infoMsgHide);
+
+  // cancella il msg quando premo Cancella
+  $("main").on("click",".infoMsg div:last-child",cancellaMsg);
+
+  //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
+  contattoAnteprima.click(contattoSelezionato);
+
+  // filtro contatti
+  //gestirte evento su tastiera
+  filtraContatto.keyup(cercareContatto);
+
+  // rendo visibile la ricerca della chat nei messaggi
+  $("main").on("click",".rightActive .cercaMessaggi",ricercaChatInput);
+
+  // filtro chat
+  //gestire evento su tastiera della ricerca dei msg nella chat
+  $(".rightActive .ricercaParoleChat").keyup(ricercaMsgChat);
+
+  //FUNZIONI-----------------------------------------------
+
+  //visualizzo solo il microfono e non il pulsante invio
+  function invioMsgShow() {
     var contenutoMsg = $(".invioShow input").val();
     // il tasto invio compare solo se è presente il msg
     if (contenutoMsg.length == 0) {
@@ -28,7 +63,7 @@ $(document).ready(function(){
       invio.css('display', 'block');
       console.log(contenutoMsg);
     }
-  });
+  }
 
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
@@ -71,11 +106,8 @@ $(document).ready(function(){
     invio.css('display', 'none');
   }
 
-  // invia il msg al click
-  invio.click(inviaMsg);
-
   // invia il msg con tasto invio (tasto 13)
-  scrivoMsg.keydown(function() {
+  function inviaMsgTastiera() {
     var d = new Date();
     var ora = d.getHours();
     // var minuti = d.getMinutes();
@@ -120,37 +152,31 @@ $(document).ready(function(){
       microfono.css('display', 'block');
       invio.css('display', 'none');
     }
-  });
+  }
 
-  // informazioni msg
+
   // rendo visibile il div info al click dell'icona
-  $("main").on("click",".opzioniMsg",
-    function(){
-      $(this).closest().find(".infoMsg").removeClass('infoMsgShow');
-      if (!$(this).parent().siblings('.infoMsg').hasClass('infoMsgShow')) {
-        $(this).parent().siblings('.infoMsg').addClass('infoMsgShow');
-      }else {
-        $(this).parent().siblings('.infoMsg').removeClass('infoMsgShow');
-      }
+  function infoMsgShow(){
+    $(this).closest().find(".infoMsg").removeClass('infoMsgShow');
+    if (!$(this).parent().siblings('.infoMsg').hasClass('infoMsgShow')) {
+      $(this).parent().siblings('.infoMsg').addClass('infoMsgShow');
+    }else {
+      $(this).parent().siblings('.infoMsg').removeClass('infoMsgShow');
     }
-  );
+  }
 
   // rendo invisibile il div info quando esco con il mouse
-  $("main").on("mouseleave",".infoMsg",
-    function(){
-      $(this).removeClass('infoMsgShow');
-    }
-  );
+  function infoMsgHide(){
+    $(this).removeClass('infoMsgShow');
+  }
 
   // cancella il msg quando premo Cancella
-  $("main").on("click",".infoMsg div:last-child",
-    function(){
-      $(this).parent().parent().hide();
-    }
-  );
+  function cancellaMsg(){
+    $(this).parent().parent().hide();
+  }
 
   //Al click cambia colore il contatto selezionato e mostra la chat corrispondente
-  contattoAnteprima.click(function(){
+  function contattoSelezionato(){
     $("p span:first-child").removeClass('color');
     $(".chatNontrovataHide").hide();
     $(".ricercaParoleChat").addClass('ricercaParoleChatHide');
@@ -174,11 +200,11 @@ $(document).ready(function(){
       }
     });
     conversazioneAttuale = $(".rightActive .conversazione");
-  });
+  }
 
   // filtro contatti
   //gestirte evento su tastiera
-  filtraContatto.keyup(function() {
+  function cercareContatto() {
     var contenutoRicercaContatto = $(".ricercaContatto").val().toLowerCase();
     $(".contattoAnteprima").each(function() {
       var nomeContatto = $(".nomeAnteprima h3");
@@ -198,27 +224,25 @@ $(document).ready(function(){
     }else {
       $(".nonTrovatoHide").hide();
     }
-  });
+  }
 
   // rendo visibile la ricerca della chat nei messaggi
-  $("main").on("click",".rightActive .cercaMessaggi",
-    function(){
-      $(this).siblings("input").val("");
+  function ricercaChatInput(){
+    $(this).siblings("input").val("");
 
-      // se non è visibile rendila tale
-      if ($(this).siblings("input").hasClass('ricercaParoleChatHide')) {
-        $(this).siblings("input").removeClass('ricercaParoleChatHide');
-        $("p span:first-child").removeClass('color');
-      }else { //altrimenti nascondila
-        $(this).siblings("input").addClass('ricercaParoleChatHide');
-        $("p span:first-child").removeClass('color');
-      }
+    // se non è visibile rendila tale
+    if ($(this).siblings("input").hasClass('ricercaParoleChatHide')) {
+      $(this).siblings("input").removeClass('ricercaParoleChatHide');
+      $("p span:first-child").removeClass('color');
+    }else { //altrimenti nascondila
+      $(this).siblings("input").addClass('ricercaParoleChatHide');
+      $("p span:first-child").removeClass('color');
     }
-  );
+  }
 
   // filtro chat
-  //gestirte evento su tastiera
-  $(".rightActive .ricercaParoleChat").keyup(function() {
+  //gestire evento su tastiera della ricerca dei msg nella chat
+  function ricercaMsgChat() {
     var contenutoRicercaParoleChat = $(".ricercaParoleChat").val().toLowerCase();
     // faccio un ciclo dei messaggi all'interno della chat
     $(".rightActive .conversazione div").each(function() {
@@ -243,8 +267,7 @@ $(document).ready(function(){
     }else {
       $(".chatNontrovataHide").hide();
     }
-  });
+  }
 
-  
 }
 );
