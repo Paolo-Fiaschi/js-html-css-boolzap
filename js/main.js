@@ -2,33 +2,43 @@ $(document).ready(function(){
 
 
   // dichiarazione variabili
-  var invio = $(".fa-telegram-plane");
+  var invio = $(".invioIcon");
   var scrivoMsg = $(".invio input");
   var infoMsgInviati = $(".msgInviatiTesto");
   var infoMsgRicevuti = $(".msgRicevutiTesto");
   var conversazioneAttuale = $(".rightActive .conversazione");
   var contattoAnteprima = $(".contattoAnteprima");
-  var d = new Date();
-  var ora = d.getHours();
-  // var minuti = d.getMinutes();
-  var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
+  var microfono = $(".microfono");
+  // var oraAttuale;
+  var ultimoAccesso = $(".nomeAccesso h4");
+  var staScrivendo = $(".hide");
+
+  // var d = new Date();
+  // var ora = d.getHours();
+  // // var minuti = d.getMinutes();
+  // var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
   //visualizzo solo il microfono e non il pulsante invio
   scrivoMsg.keydown(function() {
     var contenutoMsg = $(".invioShow input").val();
     // il tasto invio compare solo se è presente il msg
     if (contenutoMsg.length == 0) {
-      $(".microfono").css('display', 'block');
-      $(".invioIcon").css('display', 'none');
+      microfono.css('display', 'block');
+      invio.css('display', 'none');
       console.log(contenutoMsg);
       // il tasto invio non compare se non cè il msg
     }else{
-      $(".microfono").css('display', 'none');
-      $(".invioIcon").css('display', 'block');
+      microfono.css('display', 'none');
+      invio.css('display', 'block');
       console.log(contenutoMsg);
     }
   });
   // centralizzo la funzione per inviare msg al click
   function inviaMsg(){
+    var d = new Date();
+    var ora = d.getHours();
+    // var minuti = d.getMinutes();
+    var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
+
     var contenutoMsg = $(".invioShow input").val();
     console.log(contenutoMsg);
     conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
@@ -36,8 +46,8 @@ $(document).ready(function(){
     $(".oraDinamica").html(ora + ":" + minuti);
 
     // cambio lo stato dell'utente mentre risponde (sta scrivendo)
-    $(".nomeAccesso h4").hide();
-    $(".nomeAccesso span").show();
+    ultimoAccesso.hide();
+    staScrivendo.show();
 
     //risposta automatica del pc
     setTimeout(function(){
@@ -47,33 +57,46 @@ $(document).ready(function(){
       $(".oraDinamica").html(ora + ":" + minuti);
 
       // lo stato dell'utente torna di default (ultimo accesso)
-      $(".nomeAccesso h4").show();
-      $(".nomeAccesso .hide").hide();
+      ultimoAccesso.show();
+      staScrivendo.hide();
+      // far scrollare la pagina fino al msg più recente
+      var altezzaFinestra = $(".rightActive .conversazione").innerHeight();//considero l'altezza della conversazione attiva
+      $(".conversazione").animate({//aggiungo l'animazione di scroll alla conversazione
+        scrollTop: altezzaFinestra//faccio scrollare dal top all'allatezza della conversazione attiva
+      },0);
+
     }, 1000);
 
-
     console.log($(this));
-    $(".invio input").val("");
-    $(".microfono").css('display', 'block');
-    $(".invioIcon").css('display', 'none');
-
+    scrivoMsg.val("");
+    microfono.css('display', 'block');
+    invio.css('display', 'none');
   }
 
+  // invia il msg al click
+  invio.click(inviaMsg);
+
   // invia il msg con tasto invio (tasto 13)
-  $(".invio input").keydown(function(event) {
+  scrivoMsg.keydown(function() {
+    var d = new Date();
+    var ora = d.getHours();
+    // var minuti = d.getMinutes();
+    var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
     var contenutoMsg = $(this).val();
     console.log(event);
     // si può inivare il msg solo se premendo invio e se il msg c'è
     if ((event.which == 13)&&(contenutoMsg.length != 0)) {
-      console.log("invio");
+
+      // console.log("invio");
       var contenutoMsg = $(this).val();
       conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
       // aggiungo la data ai messaggi inviati
       $(".oraDinamica").html(ora + ":" + minuti);
+      // $(".rightActive .conversazione").scroll();
 
       // cambio lo stato dell'utente mentre risponde (sta scrivendo)
-      $(".nomeAccesso h4").hide();
-      $(".nomeAccesso span").show();
+      ultimoAccesso.hide();
+      staScrivendo.show();
 
       //risposta automatica del pc
 
@@ -84,25 +107,28 @@ $(document).ready(function(){
         $(".oraDinamica").html(ora + ":" + minuti);
 
         // lo stato dell'utente torna di default (ultimo accesso)
-        $(".nomeAccesso h4").show();
-        $(".nomeAccesso .hide").hide();
+        ultimoAccesso.show();
+        staScrivendo.hide();
         // aggiungo la data ai messaggi inviati
         $(".oraDinamica").html(ora + ":" + minuti);
+        // far scrollare la pagina fino al msg più recente
+        var altezzaFinestra = $(".rightActive .conversazione").innerHeight();
+        $(".conversazione").animate({
+          scrollTop: altezzaFinestra
+        },0);
 
       }, 1000);
       $(this).val("");
-      $(".microfono").css('display', 'block');
-      $(".invioIcon").css('display', 'none');
+      microfono.css('display', 'block');
+      invio.css('display', 'none');
     }
   });
-  // invia il msg al click
-  invio.click(inviaMsg);
 
   // informazioni msg
   // rendo visibile il div info al click dell'icona
   $("main").on("click",".opzioniMsg",
     function(){
-      $(this).parent().parent().parent().find(".infoMsg").removeClass('infoMsgShow');
+      $(this).closest().find(".infoMsg").removeClass('infoMsgShow');
       if (!$(this).parent().siblings('.infoMsg').hasClass('infoMsgShow')) {
         $(this).parent().siblings('.infoMsg').addClass('infoMsgShow');
       }else {
@@ -190,7 +216,7 @@ $(document).ready(function(){
   );
   // filtro chat
   //gestirte evento su tastiera
-  $(".ricercaParoleChat").keyup(function() {
+  $(".rightActive .ricercaParoleChat").keyup(function() {
     var contenutoRicercaParoleChat = $(".ricercaParoleChat").val().toLowerCase();
     // faccio un ciclo dei messaggi all'interno della chat
     $(".conversazione div").each(function() {
