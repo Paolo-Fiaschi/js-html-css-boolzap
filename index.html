@@ -141,7 +141,7 @@
             </div>
             <div class="nomeAccesso">
               <h3>Michele</h3>
-              <h4 class="default show">Ultimo accesso oggi alle <span class="ora oraDinamica">15:45</span></h4>
+              <h4 class="default show">Ultimo accesso oggi alle <span class="ora oraAccesso">15:45</span></h4>
               <span class="default hide"> Sta scrivendo...</span>
             </div>
           </div>
@@ -723,12 +723,29 @@
         </div>
       </section>
     </main>
+
+    <!-- TEMPLATE ------------------------------------->
+    <script id="msg-template" type="text/x-handlebars-template">
+      <div class={{msgChatPH}}>
+        <p class={{msgChatTestoPH}}>
+          <span>{{msgPH}}</span>
+          <span class='opzioniMsg'>
+            <i class='fas fa-chevron-down'></i>
+          </span>
+          <span class='ora oraDinamica'>{{oraPH}}</span>
+        </p>
+        <div class='infoMsg'>
+          <div>Info messaggio</div>
+          <div>Cancella messaggio</div>
+        </div>
+      </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script
 			  src="https://code.jquery.com/jquery-3.4.1.js"
 			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 			  crossorigin="anonymous"></script>
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

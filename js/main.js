@@ -69,14 +69,22 @@ $(document).ready(function(){
   function inviaMsg(){
     var d = new Date();
     var ora = d.getHours();
-    // var minuti = d.getMinutes();
     var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
     var contenutoMsg = $(".invioShow input").val();
     console.log(contenutoMsg);
-    conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
 
-    // aggiungo la data ai messaggi inviati
-    $(".oraDinamica").html(ora + ":" + minuti);
+    // template handlebars
+    var source = $("#msg-template").html();
+    var template = Handlebars.compile(source);
+    var context = {
+      "msgChatPH": "msgInviati",
+      "msgChatTestoPH": "msgInviatiTesto",
+      "msgPH": contenutoMsg,
+      "oraPH": ora + ":" + minuti
+    };
+    var messaggioDaAggiungere = template(context);
+
+    conversazioneAttuale.append(messaggioDaAggiungere);
 
     // cambio lo stato dell'utente mentre risponde (sta scrivendo)
     ultimoAccesso.hide();
@@ -86,17 +94,23 @@ $(document).ready(function(){
     setTimeout(
       function(){
         console.log("ok");
-        conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
 
-        // aggiungo la data ai messaggi inviati
-        $(".oraDinamica").html(ora + ":" + minuti);
+        // template handlebars
+        var context = {
+          "msgChatPH": "msgRicevuti",
+          "msgChatTestoPH": "msgRicevutiTesto",
+          "msgPH": "Ok",
+          "oraPH": ora + ":" + minuti
+        };
+        var messaggioDaAggiungere = template(context);
+        conversazioneAttuale.append(messaggioDaAggiungere);
 
         // lo stato dell'utente torna di default (ultimo accesso)
         ultimoAccesso.show();
         staScrivendo.hide();
 
         // far scrollare la pagina fino al msg più recente
-        var altezzaFinestra = $(".rightActive .conversazione").innerHeight();//considero l'altezza della conversazione attiva
+        var altezzaFinestra = $(".rightActive").innerHeight();//considero l'altezza della conversazione attiva
         $(".conversazione").animate({//aggiungo l'animazione di scroll alla conversazione
           scrollTop: altezzaFinestra//faccio scrollare dal top all'allatezza della conversazione attiva
       },0);
@@ -107,52 +121,10 @@ $(document).ready(function(){
     invio.css('display', 'none');
   }
 
-  // invia il msg con tasto invio (tasto 13)
-  function inviaMsgTastiera() {
-    var d = new Date();
-    var ora = d.getHours();
-    // var minuti = d.getMinutes();
-    var minuti = (d.getMinutes()<10?'0':'') + d.getMinutes();//per avere 2 cifre ai minuti < 10
-    var contenutoMsg = $(this).val();
-    console.log(event);
-    // si può inivare il msg solo se premendo invio e se il msg c'è
-    if ((event.which == 13)&&(contenutoMsg.length != 0)) {
-      // console.log("invio");
-      var contenutoMsg = $(this).val();
-      conversazioneAttuale.append("<div class='msgInviati'><p class='msgInviatiTesto'><span>" +  contenutoMsg  + "</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
-
-      // aggiungo la data ai messaggi inviati
-      $(".oraDinamica").html(ora + ":" + minuti);
-
-      // cambio lo stato dell'utente mentre risponde (sta scrivendo)
-      ultimoAccesso.hide();
-      staScrivendo.show();
-
-      //risposta automatica del pc
-      setTimeout(
-        function(){
-          console.log("ok");
-          conversazioneAttuale.append("<div class='msgRicevuti'><p class='msgRicevutiTesto'><span>Ok</span><span class='opzioniMsg'><i class='fas fa-chevron-down'></i></span><span class='ora oraDinamica'></span></p><div class='infoMsg'><div>Info messaggio</div><div>Cancella messaggio</div></div></div>");
-
-          // aggiungo la data ai messaggi inviati
-          $(".oraDinamica").html(ora + ":" + minuti);
-
-          // lo stato dell'utente torna di default (ultimo accesso)
-          ultimoAccesso.show();
-          staScrivendo.hide();
-
-          // aggiungo la data ai messaggi inviati
-          $(".oraDinamica").html(ora + ":" + minuti);
-
-          // far scrollare la pagina fino al msg più recente
-          var altezzaFinestra = $(".rightActive .conversazione").innerHeight();
-          $(".conversazione").animate({
-            scrollTop: altezzaFinestra
-        },0);
-      }, 1000);
-      $(this).val("");
-      microfono.css('display', 'block');
-      invio.css('display', 'none');
+  // richiamo la funzione invia msg al click per l'evento della tastiera
+  function inviaMsgTastiera(event){
+    if ((event.which == 13)&&(contenutoMsg.length > 0)) {
+      inviaMsg();
     }
   }
 
